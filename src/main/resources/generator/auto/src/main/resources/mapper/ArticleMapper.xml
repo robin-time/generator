@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robintime.redcandle.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.robintime.redcandle.entity.Article">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="article_author" jdbcType="VARCHAR" property="articleAuthor" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_release_date" jdbcType="TIMESTAMP" property="articleReleaseDate" />
+    <result column="article_views" jdbcType="BIGINT" property="articleViews" />
+    <result column="article_like" jdbcType="BIGINT" property="articleLike" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="deleted" jdbcType="CHAR" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_author, article_title, article_release_date, article_views, article_like, 
+    creator, gmt_created, modifier, gmt_modified, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.robintime.redcandle.entity.Article">
+    insert into article (id, article_author, article_title, 
+      article_release_date, article_views, article_like, 
+      creator, gmt_created, modifier, 
+      gmt_modified, deleted)
+    values (#{id,jdbcType=BIGINT}, #{articleAuthor,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articleReleaseDate,jdbcType=TIMESTAMP}, #{articleViews,jdbcType=BIGINT}, #{articleLike,jdbcType=BIGINT}, 
+      #{creator,jdbcType=VARCHAR}, #{gmtCreated,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{deleted,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.robintime.redcandle.entity.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="articleAuthor != null">
+        article_author,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleReleaseDate != null">
+        article_release_date,
+      </if>
+      <if test="articleViews != null">
+        article_views,
+      </if>
+      <if test="articleLike != null">
+        article_like,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="articleAuthor != null">
+        #{articleAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleReleaseDate != null">
+        #{articleReleaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleViews != null">
+        #{articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="articleLike != null">
+        #{articleLike,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreated != null">
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.robintime.redcandle.entity.Article">
+    update article
+    <set>
+      <if test="articleAuthor != null">
+        article_author = #{articleAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleReleaseDate != null">
+        article_release_date = #{articleReleaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleViews != null">
+        article_views = #{articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="articleLike != null">
+        article_like = #{articleLike,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.robintime.redcandle.entity.Article">
+    update article
+    set article_author = #{articleAuthor,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      article_release_date = #{articleReleaseDate,jdbcType=TIMESTAMP},
+      article_views = #{articleViews,jdbcType=BIGINT},
+      article_like = #{articleLike,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

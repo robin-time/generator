@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="C:/Users/robin/.m2/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+<!--        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"-->
+<!--                        connectionURL="jdbc:oracle:thin:@172.20.16.***:1521:CARGO" userId="***"-->
+<!--                        password="***"/>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/redcandle"
+                        userId="root"
+                        password="123456"/>
+        <!--实体类-->
+        <javaModelGenerator targetPackage="com.robintime.redcandle.entity"
+                            targetProject="C:/Users/robin/IdeaProjects/generator/src/main/resources/generator/auto">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--mapper下xml文件-->
+        <sqlMapGenerator targetPackage="src.main.resources.mapper"
+                         targetProject="C:/Users/robin/IdeaProjects/generator/src/main/resources/generator/auto">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- mapper classs-->
+        <javaClientGenerator targetPackage="com.robintime.redcandle.mapper"
+                             targetProject="C:/Users/robin/IdeaProjects/generator/src/main/resources/generator/auto" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>-->
+
+        <table tableName="article" domainObjectName="Article"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--<columnRenamingRule searchString="^D_"
+                                replaceString=""/>-->
+        </table>
+        <table tableName="article_content" domainObjectName="ArticleContent"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--<columnRenamingRule searchString="^D_"
+                                replaceString=""/>-->
+        </table>
+    </context>
+</generatorConfiguration>
+
+<!--        https://www.cnblogs.com/yjmyzz/p/mybatis-generator-tutorial.html-->
+<!--        a) 因为生成过程中需要连接db，所以第3行指定了驱动jar包的位置-->
+<!--        b) 15-17行为连接字符串-->
+<!--        c) 19-33行指定生成“entity实体类、mybatis映射xml文件、mapper接口”的具体位置-->
+<!--        d) 40-46行为具体要生成的表，如果有多个表，复制这一段，改下表名即可-->
+<!--        最后给一些小技巧：-->
+<!--        a) 建表时，字段名称建议用"_"分隔多个单词，比如:AWB_NO、REC_ID...，这样生成的entity，属性名称就会变成漂亮的驼峰命名，即：awbNo、recId-->
+<!--        b)oracle中，数值形的字段，如果指定精度，比如Number(12,2)，默认生成entity属性是BigDecimal型 ，如果不指定精度，比如:Number(9)，指默认生成的是Long型-->
+<!--        c)oracle中的nvarchar/nvarchar2，mybatis-generator会识别成Object型，建议不要用nvarchar2，改用varchar2-->
